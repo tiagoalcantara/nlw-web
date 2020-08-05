@@ -90,13 +90,14 @@
         margin-left: 1.6rem;
     }
 
-    .teacher-item footer button {
+    .teacher-item footer a {
         width: 24.5rem;
         font-size: 1.6rem;
         justify-content: center;
+        text-decoration: none;
     }
 
-    .teacher-item footer button img {
+    .teacher-item footer a img {
         margin-right:1.6rem;
     }
 }
