@@ -1,0 +1,97 @@
+#page-login {
+    width: 100vw;
+    height: 100vh;
+}
+
+#page-login .login-container {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#page-login .login-container .logo-background {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    width: 60%;
+    background: var(--color-primary);
+}
+
+#page-login .login-container .logo-background img {
+    width: 48rem;
+}
+
+#page-login .login-container .logo-background h2 {
+    color: var(--color-text-in-primary);
+    max-width:360px;
+    margin-right: 8rem;
+
+    font: 3.6rem Archivo;
+}
+
+#page-login .login-container .login {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+#page-login .login-container .login h1 {
+    margin-right: 28rem;
+}
+
+#page-login .login-container .login .login-form{
+    width: 60%;
+}
+
+#page-login .login-container .login .login-form .remember-me{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+#page-login .checkbox-container input[type="checkbox"]{
+    margin-right: 1.6rem;
+}
+
+#page-login .login-form .login-button{
+    margin: 2rem 0;
+    display: flex;
+    
+}
+
+#page-login .login-form .login-button button{
+    flex: 1;
+    border-radius: .4rem;
+    height: 4.8rem;
+    background: var(--color-secondary);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color .2s;
+}
+
+#page-login .login-form .login-button button:hover {
+    background: var(--color-secondary-dark);
+}
+
+#page-login .login-footer {
+    display: flex;
+    width: 60%;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#page-login .login-footer .free {
+    display: flex;
+}
+
+#page-login .login-footer .free p {
+    margin-right: 1rem;
+}
+

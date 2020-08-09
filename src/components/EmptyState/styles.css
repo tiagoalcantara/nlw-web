@@ -1,0 +1,13 @@
+.empty-state-container {
+    text-align: center;
+    margin: 8rem;
+    margin-top: 16rem;
+}
+
+.empty-state-container h1 {
+    font-size: 2.8rem;
+}
+
+.empty-state-container p {
+    font-size: 1.2rem;
+}

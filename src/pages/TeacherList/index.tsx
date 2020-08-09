@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from 'react';
+import React, { useState, useEffect ,FormEvent } from 'react';
 
 import PageHeader from './../../components/PageHeader/index';
 
@@ -7,17 +7,22 @@ import TeacherItem, { Teacher } from '../../components/TeacherItem/';
 import Input from '../../components/Input/';
 import Select from './../../components/Select/';
 import api from './../../services/api';
+import Loader from './../../components/Loader/index';
+import EmptyState from './../../components/EmptyState/index';
 
 function TeacherList(){
 
+    const [isLoading, setIsLoading] = useState(true);
     const [teachers, setTeachers] = useState([]);
-
     const [subject, setSubject] = useState('');
     const [weekDay, setWeekDay] = useState('');
     const [time, setTime] = useState('');
 
+
     async function searchTeachers(e: FormEvent){
         e.preventDefault();
+
+        setIsLoading(true);
 
         const response = await api.get('/classes', {
             params: {
@@ -28,7 +33,25 @@ function TeacherList(){
         });
 
         setTeachers(response.data);
+        
+        setIsLoading(false);
     }
+
+    useEffect(() => {
+        const fetch = async () => {
+            setIsLoading(true);
+
+            try { 
+                const response = await api.get('/classes');
+                setTeachers(response.data);
+                setIsLoading(false);
+            } catch(err){
+                setIsLoading(false)
+            }
+        }
+
+        fetch();
+    }, []);
 
     return (
         <div id="page-teacher-list" className="container">
@@ -38,6 +61,7 @@ function TeacherList(){
                     name="subject" 
                     label="Matéria" 
                     options={[
+                    {value: '', label: 'Todas'},
                     {value: 'Artes', label: 'Artes'},
                     {value: 'Biologia', label: 'Biologia'},
                     {value: 'Química', label: 'Química'},
@@ -54,6 +78,7 @@ function TeacherList(){
                    name="week_day" 
                    label="Dia da semana" 
                    options={[
+                    {value: '', label: 'Qualquer'},
                     {value: '0', label: 'Domingo'},
                     {value: '1', label: 'Segunda-feira'},
                     {value: '2', label: 'Terça-feira'},
@@ -65,6 +90,7 @@ function TeacherList(){
                    value={weekDay}
                    onChange={(e) => {setWeekDay(e.target.value)}}
                    />
+
                    <Input 
                    type="time" 
                    label="Hora" 
@@ -80,11 +106,15 @@ function TeacherList(){
             </PageHeader>
 
             <main>
-                {teachers.map((teacher: Teacher) => {
+                {isLoading
+                ?  <Loader />
+                : teachers.map((teacher: Teacher) => {
                     return (
                         <TeacherItem key={teacher.id} teacher={teacher}/>
                     );
                 })}
+
+                {!teachers.length && !isLoading && <EmptyState />}
             </main>
         </div>
     );
